@@ -3,6 +3,7 @@
 在 Windows + Ada 16GB 卡上把三元量化的 Bonsai-2-27B 跑起来：**256K 上下文 · prefill 2000 tok/s · decode 86 tok/s · 带视觉**。
 
 - 从零复现 → **第 2 节**（约 90 分钟）
+- 需要哪些资源、从哪拿、断了怎么办 → **`RESOURCES.md`**
 - 出问题 → **第 5 节**
 - 仓库里都有啥 → **第 6 节**
 
@@ -28,6 +29,8 @@
 ## 2. 从零复现（约 90 分钟）
 
 ### 步骤 1 · 下载输入（25 GB，约 20 分钟）
+
+> 来源、sha256、备用来源、以及“拿不到怎么办” → 见 **`RESOURCES.md`**。
 
 ```powershell
 aria2c -x8 -s8 -k1M --file-allocation=none `
@@ -219,6 +222,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\verify-speed.ps1
 
 ```
 README.md                              本文件
+RESOURCES.md                           复现所需资源清单（来源 / sha256 / 备用源 / 断链后果）
 LICENSE                                Apache-2.0 全文
 versions.md                            锁定的环境与上游版本
 NOTICE                                 上游署名与许可
