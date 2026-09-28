@@ -6,7 +6,7 @@
 - 出问题 → **第 5 节**
 - 仓库里都有啥 → **第 6 节**
 
-> 本文所有命令都在 **RTX 4070 Ti SUPER 16GB + Windows 11** 上实测通过；其中步骤 1–7、9 在干净目录从零跑过一遍，产出的制品与参考制品 **sha256 逐字节一致**。
+> 本文所有命令都在 **RTX 4070 Ti SUPER 16GB + Windows 11** 上实测通过：**步骤 1→9 已在全新目录从零完整跑通**；制品 sha256 与参考制品 **逐字节一致**（8,306,927,628 B），其“路径自动推导”逻辑也已单独验证。
 
 ---
 
@@ -81,7 +81,7 @@ git -C guide      apply ..\patches\pack-py.patch
 
 ```powershell
 uv python install 3.12
-uv venv .venv --python <刚装好的 3.12 路径>
+uv venv .venv --python 3.12
 
 uv pip install --python .venv\Scripts\python.exe --index-url https://mirrors.aliyun.com/pypi/simple `
     cmake==4.4.3 ninja==1.13.2 numpy==2.5.3
@@ -91,6 +91,22 @@ uv pip install --python .venv\Scripts\python.exe --index-url https://download.py
 ```
 
 ✅ **成功的样子**：`cmake --version` → 4.4.3；`ninja --version` → 1.13.2；`python -c "import torch"` → 2.14.0+cpu
+
+**再取 FFmpeg 开发包（视觉构建必需；源码树与本仓都不含它）**
+
+```powershell
+$ff = 'src\ninfer\ffmpeg'
+if (-not (Test-Path $ff)) {
+    Invoke-WebRequest -Uri 'https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip' -OutFile ffmpeg.zip
+    Expand-Archive ffmpeg.zip -DestinationPath ffmpeg_temp -Force
+    Move-Item ffmpeg_temp\ffmpeg-master-latest-win64-gpl-shared $ff
+    Remove-Item -Recurse -Force ffmpeg_temp, ffmpeg.zip
+}
+```
+
+✅ `src\ninfer\ffmpeg\` 下出现 `bin\ doc\ include\ lib\ presets\`（`bin\` 里 7 个 DLL，约 83 MB）
+
+> 这是**上游 `build_vision_windows.bat` 的同一做法**。下载的是 **GPL 版 FFmpeg**，只在你机器上使用；本仓不分发它。少了这一步，步骤 6 会报 `PkgConfig::FFMPEG includes non-existent path`。
 
 ### 步骤 6 · 编译引擎（**必须在交互式终端里跑**，10–25 分钟）
 

@@ -1,5 +1,5 @@
 param(
-    [string]$Root = 'F:\27BB-repro',
+    [string]$Root = (Split-Path -Parent $PSScriptRoot),
     [int]$Jobs = [Environment]::ProcessorCount,
     [string]$CudaRoot = 'C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.2',
     [string]$Vcvars = 'C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\Auxiliary\Build\vcvars64.bat'
