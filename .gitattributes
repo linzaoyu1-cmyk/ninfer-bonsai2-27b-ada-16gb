@@ -1,0 +1,5 @@
+# 补丁文件必须逐字节保留（Windows 上 git apply 对换行敏感）
+*.patch -text
+
+# 二进制镜像
+*.bundle -text
