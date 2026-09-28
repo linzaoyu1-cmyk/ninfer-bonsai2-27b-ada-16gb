@@ -67,6 +67,7 @@ git -C guide checkout ca845a402866e98fcd468e010cc980f7f4d002a2
 ✅ **成功的样子**：`git -C guide log -1 --format=%H` 显示 `ca845a40…`
 
 > 这是**活仓库**，HEAD 已前进过。**不 pin 就复现不出同一个制品。**
+> **取不到时**：用仓库内离线镜像 `vendor\guide\`（同一 commit 的逐文件副本，见 `vendor\guide\SOURCE.md`）。
 
 ### 步骤 4 · 打补丁
 
@@ -225,6 +226,7 @@ patches\src-tree.patch                 源码树改动（33 文件 + 新增三�
 patches\pack-py.patch                  打包器改动（去掉硬编码路径）
 patches\prefill-port.patch             prefill 内核移植（18 文件，-p2 应用）
 mirror\ninfer-4090-windows-6eb70a07.bundle   源码树备份（上游已 404）
+vendor\guide\                          指南离线镜像（同一 commit；上游失效时备用，见其 SOURCE.md）
 tools\configure-vision.ps1             配置（视觉版）
 tools\build-vision.ps1                 编译
 tools\verify-speed.ps1                 一键体检（prefill / decode / 正确性）
