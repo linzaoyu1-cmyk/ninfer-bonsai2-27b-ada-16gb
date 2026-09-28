@@ -1,13 +1,25 @@
 ﻿diff --git a/tools/pack.py b/tools/pack.py
-index 15cf837..09ba368 100644
+index 15cf837..7e82319 100644
 --- a/tools/pack.py
 +++ b/tools/pack.py
-@@ -43,7 +43,7 @@ from pathlib import Path
+@@ -43,7 +43,8 @@ from pathlib import Path
  
  import numpy as np
  
 -NINFER_ROOT = r"E:\ninfer\src\ninfer-4090w-ternary"
-+NINFER_ROOT = r"E:\27BB\src\ninfer"
++_ROOT = Path(__file__).resolve().parents[2]  # <root>/guide/tools/pack.py -> <root>
++NINFER_ROOT = os.environ.get("NINFER_ROOT") or str(_ROOT / "src" / "ninfer")
  if NINFER_ROOT not in sys.path:
      sys.path.insert(0, NINFER_ROOT)
  
+@@ -57,8 +58,8 @@ from tools.artifact import (  # noqa: E402
+     row_split_geometry,
+ )
+ 
+-TEMPLATE = r"E:\ninfer\models\qwen3_8_27b_abliterated.ninfer"
+-GGUF = r"<WORKSPACE>\Ternary-Bonsai-2-27B-PQ2_0.gguf"
++TEMPLATE = str(_ROOT / "downloads" / "qwen3_8_27b_huihui_abliterated.ninfer")
++GGUF = str(_ROOT / "downloads" / "Ternary-Bonsai-2-27B-PQ2_0.gguf")
+ 
+ # The template must be the **groupwise-int** packing.  It is not merely a donor of the
+ # vision/MTP payloads: this packer walks the template's OWN object list and maps every name

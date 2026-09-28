@@ -32,11 +32,11 @@
 ```powershell
 aria2c -x8 -s8 -k1M --file-allocation=none `
   "https://hf-mirror.com/Barding-Defense/Qwen3.8-27B-huihui-abliterated-groupwise-int-NInfer/resolve/main/qwen3_8_27b_huihui_abliterated.ninfer" `
-  --out=qwen3_8_27b_huihui_abliterated.ninfer
+  --dir=downloads --out=qwen3_8_27b_huihui_abliterated.ninfer
 
 aria2c -x8 -s8 -k1M --file-allocation=none `
   "https://modelscope.cn/models/prism-ml/Ternary-Bonsai-2-27B-gguf/resolve/master/Ternary-Bonsai-2-27B-PQ2_0.gguf" `
-  --out=Ternary-Bonsai-2-27B-PQ2_0.gguf
+  --dir=downloads --out=Ternary-Bonsai-2-27B-PQ2_0.gguf
 ```
 
 ✅ **成功的样子**
@@ -104,10 +104,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\build-vision.ps1
 ### 步骤 7 · 打包装制品
 
 ```powershell
-python guide\tools\pack.py `
-  --template <步骤1的模板> --gguf <步骤1的GGUF> `
-  build models\Ternary-Bonsai-2-27B.ninfer
+.venv\Scripts\python.exe guide\tools\pack.py build models\Ternary-Bonsai-2-27B.ninfer
 ```
+
+> 输入路径是**自动推导**的（`pack.py` 从自身位置推 `<root>`，再去 `<root>\downloads\` 取模板与 GGUF），所以**换目录不用改任何东西**。
+> 需要覆盖时：加 `--template` / `--gguf`，或设环境变量 `NINFER_ROOT` / `NINFER_TERNARY_TEMPLATE` / `NINFER_TERNARY_GGUF`。
+> 注意 `pack.py` **拒绝覆盖已存在的输出文件**，重跑请换个输出名或先删掉旧文件。
 
 ✅ **成功的样子**
 
