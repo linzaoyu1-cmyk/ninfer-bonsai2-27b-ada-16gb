@@ -1,0 +1,36 @@
+# NOTICE — 上游署名与许可
+
+本仓库（下文称"本仓"）只包含**脚本、补丁与文档**，**不包含任何模型权重**。
+模型与内核参考实现均来自下列上游项目，请遵守各自的许可。
+
+## 引擎
+
+| 项目 | 许可 | 说明 |
+|---|---|---|
+| NInfer / Neroued | Apache-2.0 | 引擎原始实现（上游工程线） |
+| `Ambolio/ninfer-4090-windows` | Apache-2.0 | Ada/Windows 移植线；本仓 `patches/src-tree.patch` 基于其 `6eb70a07` |
+| `CraneBW/ninfer-ternary-bonsai-ada` | Apache-2.0 | 三元移植与 prefill 内核优化；本仓 `patches/prefill-port.patch` 来源于此 |
+| 魔搭 `shensanshu/ninfer-ada-ternary` | Apache-2.0 | 部署指南、打包器与验证工具链 |
+| FFmpeg | **GPL v2+** | **本仓不包含、也不分发 FFmpeg 二进制**。视觉功能需要用户自行获取（源码树内附 `LICENSE-FFMPEG.txt` 说明其来源与许可） |
+
+## 模型与模板
+
+| 项目 | 许可 | 说明 |
+|---|---|---|
+| Prism ML — `Ternary-Bonsai-2-27B` | Apache-2.0 | 三元量化模型权重 |
+| `Barding-Defense/Qwen3.8-27B-huihui-abliterated-groupwise-int-NInfer` | apache-2.0 | groupwise-int 容器模板（本流程的打包输入） |
+| Qwen (Alibaba) — Qwen3.8-27B | 见其上游许可 | 基础模型与其 tokenizer/frontend 资源 |
+
+### 必需署名
+
+> **Created using Bonsai by Prism ML.**
+
+使用本仓流程产出的制品，**必须保留该署名**，并同时保留上述各组件的许可文本。
+
+## 商标
+
+`Qwen`、`Bonsai`、`NInfer` 等名称与商标归各自所有者。本仓与上述任何项目**无隶属或背书关系**，名称仅用于说明技术来源。
+
+## 本仓自身的许可
+
+本仓中的脚本与文档以 **Apache-2.0** 发布；`patches/` 下的补丁内容版权归各自上游作者所有（来源见上表），按其原许可再分发。

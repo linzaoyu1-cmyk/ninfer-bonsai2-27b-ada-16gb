@@ -1,0 +1,13 @@
+﻿diff --git a/tools/pack.py b/tools/pack.py
+index 15cf837..09ba368 100644
+--- a/tools/pack.py
++++ b/tools/pack.py
+@@ -43,7 +43,7 @@ from pathlib import Path
+ 
+ import numpy as np
+ 
+-NINFER_ROOT = r"E:\ninfer\src\ninfer-4090w-ternary"
++NINFER_ROOT = r"E:\27BB\src\ninfer"
+ if NINFER_ROOT not in sys.path:
+     sys.path.insert(0, NINFER_ROOT)
+ 
