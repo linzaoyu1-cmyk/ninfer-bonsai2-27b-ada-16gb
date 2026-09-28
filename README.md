@@ -200,6 +200,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\verify-speed.ps1
 
 ```
 README.md                              本文件
+LICENSE                                Apache-2.0 全文
 versions.md                            锁定的环境与上游版本
 NOTICE                                 上游署名与许可
 patches\src-tree.patch                 源码树改动（33 文件 + 新增三元目录）
